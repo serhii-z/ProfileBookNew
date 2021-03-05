@@ -72,6 +72,7 @@ namespace ProfileBook.ViewModels
         {
             var path = _profileImage.ToString();
             path = path.Substring(6);
+
             return path;
         }
 
@@ -138,7 +139,7 @@ namespace ProfileBook.ViewModels
             ProfileImage = "profile.png";
         }
 
-        private void SaveOrUpdate()
+        private void AddOrUpdate()
         {
             if (_profile == null)
             {
@@ -158,7 +159,7 @@ namespace ProfileBook.ViewModels
 
         private async void OnSaveTap()
         {
-            SaveOrUpdate();
+            AddOrUpdate();
 
             if (!string.IsNullOrEmpty(_entryNickNameText) && !string.IsNullOrEmpty(_entryNameText))
                 await navigationService.GoBackAsync();
