@@ -109,12 +109,11 @@ namespace ProfileBook.ViewModels
             }
         }
 
-        private void SaveSorting(bool isName, bool isNickName, bool isTime, string sortingName)
+        private void UncheckSorting(bool isName, bool isNickName, bool isTime)
         {
             IsName = isName;
             IsNickName = isNickName;
             IsTime = isTime;
-            _settingsManager.SortingName = sortingName;
         }
 
         #endregion
@@ -133,11 +132,12 @@ namespace ProfileBook.ViewModels
         {
             base.OnPropertyChanged(args);
 
-            if(args.PropertyName == nameof(IsName))
+            if (args.PropertyName == nameof(IsName))
             {
                 if (_isName)
                 {
-                    SaveSorting(_isName, false, false, "Name");
+                    UncheckSorting(_isName, false, false);
+                    _settingsManager.SortingName = "Name";
                 }
                 else
                 {
@@ -149,7 +149,8 @@ namespace ProfileBook.ViewModels
             {
                 if (_isNickName)
                 {
-                    SaveSorting(false, _isNickName, false, "NickName");
+                    UncheckSorting(false, _isNickName, false);
+                    _settingsManager.SortingName = "NickName";
                 }
                 else
                 {
@@ -161,7 +162,8 @@ namespace ProfileBook.ViewModels
             {
                 if (_isTime)
                 {
-                    SaveSorting(false, false, _isTime, "CreationTime");
+                    UncheckSorting(false, false, _isTime);
+                    _settingsManager.SortingName = "CreationTime";
                 }
                 else
                 {
