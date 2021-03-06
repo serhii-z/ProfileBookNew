@@ -16,57 +16,45 @@
         
     </ContentPage.ToolbarItems>
 
-    <FlexLayout Direction="Row" 
-                BackgroundColor="{DynamicResource pageBackgroundColor}">
-
-        <FlexLayout FlexLayout.Grow="1"></FlexLayout>
-        
-        <FlexLayout FlexLayout.Grow="6" Direction="Column">
-
-            <FlexLayout FlexLayout.Grow="1" 
-                        Direction="Column" 
-                        JustifyContent="Center">
-                
-                        <Image FlexLayout.Basis="90%"
-                               Aspect="AspectFit"
-                               Source="{Binding ProfileImage}" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ImageTapCommand}"/>
-                                </Image.GestureRecognizers>
-                        </Image>
-                
-            </FlexLayout>
-
-            <FlexLayout FlexLayout.Grow="1" 
-                        Direction="Column" 
-                        JustifyContent="Center" >
-                
-                        <Entry Placeholder="{x:Static resource:Resource.AddNickNamePlaceholder}" 
-                               Text="{Binding EntryNickNameText, Mode=TwoWay}"/>
-                        <Entry Placeholder="{x:Static resource:Resource.AddNamePlaceholder}" 
-                               Text="{Binding EntryNameText, Mode=TwoWay}"
-                               Margin="0,10,0,0" />
-                
-            </FlexLayout>
-
-            <FlexLayout FlexLayout.Grow="1" 
-                        Direction="Column" 
-                        JustifyContent="Center" >
-                
-                        <Editor Placeholder="{x:Static resource:Resource.AddDescription}" 
-                                Text="{Binding EditorText, Mode=TwoWay}"
-                                FlexLayout.Basis="100%"
-                                BackgroundColor="LightGray" 
-                                MaxLength="120"/>
-                
-            </FlexLayout>
-
-            <FlexLayout FlexLayout.Grow="0.2" ></FlexLayout>
-
-        </FlexLayout>
-        
-        <FlexLayout FlexLayout.Grow="1"></FlexLayout>
-
-    </FlexLayout>
+    <Grid BackgroundColor="{DynamicResource pageBackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1"
+               Grid.Row="0"
+               VerticalOptions="Center"
+               Aspect="AspectFit"
+               Source="{Binding ProfileImage}" >
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ImageTapCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Entry Grid.Column="1" 
+               Grid.Row="2"
+               Placeholder="{x:Static resource:Resource.AddNickNamePlaceholder}"
+               Text="{Binding EntryNickNameText, Mode=TwoWay}"/>
+        <Entry Grid.Column="1" 
+               Grid.Row="3" 
+               Placeholder="{x:Static resource:Resource.AddNamePlaceholder}"
+               Text="{Binding EntryNameText, Mode=TwoWay}"/>
+        <Editor Grid.Column="1"
+                Grid.Row="5"
+                Placeholder="{x:Static resource:Resource.AddDescription}" 
+                Text="{Binding EditorText, Mode=TwoWay}"
+                FlexLayout.Basis="100%"
+                BackgroundColor="LightGray" 
+                MaxLength="120"/>
+    </Grid>
 
 </ContentPage>

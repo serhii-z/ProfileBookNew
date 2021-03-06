@@ -7,7 +7,6 @@
              NavigationPage.HasBackButton="False">
 
     <ContentPage.ToolbarItems>
-        
         <ToolbarItem Name="MenuItem1" 
                      Order="Primary" 
                      Icon="exit.png" 
@@ -20,15 +19,11 @@
                      Priority="1" 
                      Command="{Binding SettingsTapCommand}" 
                      CommandParameter = "1"/>
-        
     </ContentPage.ToolbarItems>
 
     <StackLayout BackgroundColor="{DynamicResource pageBackgroundColor}">
-        
         <Grid>
-            
             <AbsoluteLayout>
-                
                 <ListView AbsoluteLayout.LayoutFlags="All"
                           ItemsSource="{Binding ProfileList, Mode=TwoWay}"
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -83,11 +78,8 @@
                         Margin="0,0,20,40"
                         Command="{Binding AddTapCommand}">
                 </ImageButton>
-                
             </AbsoluteLayout>
-            
         </Grid>
-        
     </StackLayout>
 
 </ContentPage>
