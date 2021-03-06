@@ -56,11 +56,11 @@ namespace ProfileBook.ViewModels
             set => SetProperty(ref _title, value);
         }
 
-        private ObservableCollection<ProfileModel> _items;
-        public ObservableCollection<ProfileModel> Items
+        private ObservableCollection<ProfileModel> _profileList;
+        public ObservableCollection<ProfileModel> ProfileList
         {
-            get { return _items; }
-            set => SetProperty(ref _items, value);
+            get { return _profileList; }
+            set => SetProperty(ref _profileList, value);
         }
 
         private bool _isNoProfiles;
@@ -98,11 +98,11 @@ namespace ProfileBook.ViewModels
         {
             if (profiles.Count > 0)
             {
-                Items = new ObservableCollection<ProfileModel>();
+                ProfileList = new ObservableCollection<ProfileModel>();
 
                 foreach (var item in profiles)
                 {
-                    Items.Add(item);
+                    ProfileList.Add(item);
                 }
 
                 IsNoProfiles = false;
@@ -145,10 +145,10 @@ namespace ProfileBook.ViewModels
 
                 if (answer == 1)
                 {
-                    Items.Remove(profile);
+                    ProfileList.Remove(profile);
                 }
 
-                IsNoProfiles = Items.Count > 0 ? false : true;
+                IsNoProfiles = ProfileList.Count > 0 ? false : true;
             }
         }
 

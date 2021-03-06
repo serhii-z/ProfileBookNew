@@ -30,7 +30,7 @@
             <AbsoluteLayout>
                 
                 <ListView AbsoluteLayout.LayoutFlags="All"
-                          ItemsSource="{Binding Items, Mode=TwoWay}"
+                          ItemsSource="{Binding ProfileList, Mode=TwoWay}"
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                           HasUnevenRows="True"
                           AbsoluteLayout.LayoutBounds="0,1,1,1"
