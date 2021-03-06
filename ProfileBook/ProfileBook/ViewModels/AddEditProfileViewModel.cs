@@ -78,24 +78,20 @@ namespace ProfileBook.ViewModels
 
         private void CreateProfile()
         {
-            var userId = _authorizationService.GetAuthorizedUserId();
-            var path = ExtractPath();
-
-            _profile = new Models.ProfileModel()
+            _profile = new ProfileModel()
             {
-                ImagePath = path,
+                ImagePath = ExtractPath(),
                 NickName = _entryNickNameText,
                 Name = _entryNameText,
                 Description = _editorText,
                 CreationTime = DateTime.Now,
-                UserId = userId
+                UserId = _authorizationService.GetAuthorizedUserId()
             };
         }
 
         private void UpdateProfile()
         {
-            var path = ExtractPath();
-            _profile.ImagePath = path;
+            _profile.ImagePath = ExtractPath();
             _profile.NickName = _entryNickNameText;
             _profile.Name = _entryNameText;
             _profile.Description = _editorText;
