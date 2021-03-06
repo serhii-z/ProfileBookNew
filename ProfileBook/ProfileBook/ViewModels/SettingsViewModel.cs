@@ -72,41 +72,20 @@ namespace ProfileBook.ViewModels
 
         private void ActivateControlsSorting()
         {
-            switch (_settingsManager.SortingName)
-            {
-                case "Name":
-                    IsName = true;
-                    break;
-                case "NickName":
-                    IsNickName = true;
-                    break;
-                case "CreationTime":
-                    IsTime = true;
-                    break;
-            }
+            IsName = _settingsManager.IsSortingByName;
+            IsNickName = _settingsManager.IsSortingByNickName;
+            IsTime = _settingsManager.IsSortingByTime;
         }
 
         private void ActivateControlsTheme()
         {
-            switch (_settingsManager.ThemeName)
-            {
-                case nameof(DarkTheme):
-                    IsDark = true;
-                    break;
-            }
+            IsDark = _settingsManager.IsDarkTheme;
         }
 
         private void ActivateControlsCulture()
         {
-            switch (_settingsManager.CultureName)
-            {
-                case "uk":
-                    IsUkrainian = true;
-                    break;
-                case "ru":
-                    IsRussian = true;
-                    break;
-            }
+            IsUkrainian = _settingsManager.IsUkrainianCulture;
+            IsRussian = _settingsManager.IsRussianCulture;
         }
 
         private void UncheckSorting(bool isName, bool isNickName, bool isTime)
@@ -137,10 +116,12 @@ namespace ProfileBook.ViewModels
                 if (_isName)
                 {
                     UncheckSorting(_isName, false, false);
+                    _settingsManager.IsSortingByName = _isName;
                     _settingsManager.SortingName = "Name";
                 }
                 else
                 {
+                    _settingsManager.IsSortingByName = false;
                     _settingsManager.SortingName = string.Empty;
                 }
             }
@@ -150,10 +131,12 @@ namespace ProfileBook.ViewModels
                 if (_isNickName)
                 {
                     UncheckSorting(false, _isNickName, false);
+                    _settingsManager.IsSortingByNickName = _isNickName;
                     _settingsManager.SortingName = "NickName";
                 }
                 else
                 {
+                    _settingsManager.IsSortingByNickName = false;
                     _settingsManager.SortingName = string.Empty;
                 }
             }
@@ -163,10 +146,12 @@ namespace ProfileBook.ViewModels
                 if (_isTime)
                 {
                     UncheckSorting(false, false, _isTime);
+                    _settingsManager.IsSortingByTime = _isTime;
                     _settingsManager.SortingName = "CreationTime";
                 }
                 else
                 {
+                    _settingsManager.IsSortingByTime = false;
                     _settingsManager.SortingName = string.Empty;
                 }
             }
@@ -175,10 +160,12 @@ namespace ProfileBook.ViewModels
             {
                 if (_isDark)
                 {
+                    _settingsManager.IsDarkTheme = _isDark;
                     _settingsManager.ThemeName = nameof(DarkTheme);
                 }
                 else
                 {
+                    _settingsManager.IsDarkTheme = false;
                     _settingsManager.ThemeName = string.Empty;
                 }
             }
@@ -188,10 +175,12 @@ namespace ProfileBook.ViewModels
                 if (_isUkrainian)
                 {
                     IsRussian = false;
+                    _settingsManager.IsUkrainianCulture = _isUkrainian;
                     _settingsManager.CultureName = "uk";
                 }
                 else
                 {
+                    _settingsManager.IsUkrainianCulture = false;
                     _settingsManager.CultureName = string.Empty;
                 }
                 _cultureActivator.AplyCulture();
@@ -202,10 +191,12 @@ namespace ProfileBook.ViewModels
                 if (_isRussian)
                 {
                     IsUkrainian = false;
+                    _settingsManager.IsRussianCulture = _isRussian;
                     _settingsManager.CultureName = "ru";
                 }
                 else
                 {
+                    _settingsManager.IsRussianCulture = false;
                     _settingsManager.CultureName = string.Empty;
                 }
                 _cultureActivator.AplyCulture();
