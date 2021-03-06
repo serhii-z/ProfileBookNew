@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using ProfileBook.Properties;
 using ProfileBook.ResourceActivator;
+using System.ComponentModel;
 
 namespace ProfileBook.ViewModels
 {
@@ -46,22 +47,14 @@ namespace ProfileBook.ViewModels
         public string EntryLoginText
         {
             get => _entryLoginText;
-            set
-            {
-                SetProperty(ref _entryLoginText, value);
-                CheckTextInput(_entryLoginText);                   
-            }
+            set => SetProperty(ref _entryLoginText, value);
         }
 
         private string _entryPasswordText;
         public string EntryPasswordText
         {
             get => _entryPasswordText;
-            set
-            {
-                SetProperty(ref _entryPasswordText, value);
-                CheckTextInput(_entryPasswordText);                
-            }
+            set => SetProperty(ref _entryPasswordText, value);
         }
 
         private bool _enabledButton = false;
@@ -144,6 +137,21 @@ namespace ProfileBook.ViewModels
         #endregion
 
         #region --- Overrides ---
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(EntryLoginText))
+            {
+                CheckTextInput(_entryLoginText);
+            }
+
+            if (args.PropertyName == nameof(EntryPasswordText))
+            {
+                CheckTextInput(_entryPasswordText);
+            }
+        }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {

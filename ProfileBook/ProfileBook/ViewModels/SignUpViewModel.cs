@@ -7,6 +7,7 @@ using ProfileBook.Validators;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ProfileBook.Properties;
+using System.ComponentModel;
 
 namespace ProfileBook.ViewModels
 {
@@ -35,33 +36,21 @@ namespace ProfileBook.ViewModels
         public string EntryLoginText
         {
             get => _entryLoginText;
-            set
-            {
-                SetProperty(ref _entryLoginText, value);
-                CheckTextInput(_entryLoginText);              
-            }
+            set => SetProperty(ref _entryLoginText, value);
         }
 
         private string _entryPasswordText;
         public string EntryPasswordText
         {
             get => _entryPasswordText;
-            set
-            {
-                SetProperty(ref _entryPasswordText, value);
-                CheckTextInput(_entryPasswordText);                 
-            }
+            set => SetProperty(ref _entryPasswordText, value);
         }
 
         private string _entryConfitmPasswordText;
         public string EntryConfirmPasswordText
         {
             get => _entryConfitmPasswordText;
-            set
-            {
-                SetProperty(ref _entryConfitmPasswordText, value);
-                CheckTextInput(_entryConfitmPasswordText);             
-            }
+            set => SetProperty(ref _entryConfitmPasswordText, value);
         }
 
         private bool _enabledButton = false;
@@ -196,6 +185,30 @@ namespace ProfileBook.ViewModels
                 parameters.Add("login", user.Login);
 
                 await navigationService.GoBackAsync(parameters);
+            }
+        }
+
+        #endregion
+
+        #region --- Overrides ---
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(EntryLoginText))
+            {
+                CheckTextInput(_entryLoginText);
+            }
+
+            if (args.PropertyName == nameof(EntryPasswordText))
+            {
+                CheckTextInput(_entryPasswordText);
+            }
+
+            if (args.PropertyName == nameof(EntryConfirmPasswordText))
+            {
+                CheckTextInput(_entryConfitmPasswordText);
             }
         }
 
