@@ -101,6 +101,30 @@ namespace ProfileBook.ViewModels
             IsRussian = isRussian;
         }
 
+        private void UpdateSortingName(bool isChecked, string sortingName)
+        {
+            if(isChecked)
+                _settingsManager.SortingName = sortingName;          
+            else
+                _settingsManager.SortingName = string.Empty;
+        }
+
+        private void UpdateThemeName(bool isChecked, string themeName)
+        {
+            if (isChecked)
+                _settingsManager.ThemeName = themeName;
+            else
+                _settingsManager.ThemeName = string.Empty;
+        }
+
+        private void UpdateCultureName(bool isChecked, string cultureName)
+        {
+            if (isChecked)
+                _settingsManager.CultureName = cultureName;
+            else
+                _settingsManager.CultureName = string.Empty;
+        }
+
         #endregion
 
         #region --- Private Helpers ---
@@ -121,59 +145,34 @@ namespace ProfileBook.ViewModels
             {
                 UncheckSorting(_isName, false, false);
                 _settingsManager.IsSortingByName = _isName;
-
-                if (_isName)
-                    _settingsManager.SortingName = "Name";
-                else
-                    _settingsManager.SortingName = string.Empty;
-           
+                UpdateSortingName(_isName, "Name");           
             }
 
             if (args.PropertyName == nameof(IsNickName))
             {
                 UncheckSorting(false, _isNickName, false);
                 _settingsManager.IsSortingByNickName = _isNickName;
-
-                if (_isNickName)
-                    _settingsManager.SortingName = "NickName";
-                else
-                    _settingsManager.SortingName = string.Empty;
-
+                UpdateSortingName(_isNickName, "NickName");
             }
 
             if (args.PropertyName == nameof(IsTime))
             {
                 UncheckSorting(false, false, _isTime);
                 _settingsManager.IsSortingByTime = _isTime;
-
-                if (_isTime)
-      
-                    _settingsManager.SortingName = "CreationTime";
-                else
-                    _settingsManager.SortingName = string.Empty;
-                
+                UpdateSortingName(_isTime, "CreationTime");
             }
 
             if (args.PropertyName == nameof(IsDark))
             {
                 _settingsManager.IsDarkTheme = _isDark;
-
-                if (_isDark)
-                    _settingsManager.ThemeName = nameof(DarkTheme);
-                else
-                    _settingsManager.ThemeName = string.Empty;
+                UpdateThemeName(_isDark, nameof(DarkTheme));
             }
 
             if (args.PropertyName == nameof(IsUkrainian))
             {
                 UncheckCulture(_isUkrainian, false);
                 _settingsManager.IsUkrainianCulture = _isUkrainian;
-
-                if (_isUkrainian)
-                    _settingsManager.CultureName = "uk";
-                else
-                    _settingsManager.CultureName = string.Empty;
-                
+                UpdateCultureName(_isUkrainian, "uk");
                 _cultureActivator.AplyCulture();
             }
 
@@ -181,12 +180,7 @@ namespace ProfileBook.ViewModels
             {
                 UncheckCulture(false, _isRussian);
                 _settingsManager.IsRussianCulture = _isRussian;
-
-                if (_isRussian)
-                    _settingsManager.CultureName = "ru";
-                else
-                    _settingsManager.CultureName = string.Empty;
-
+                UpdateCultureName(_isRussian, "ru");
                 _cultureActivator.AplyCulture();
             }
         }
