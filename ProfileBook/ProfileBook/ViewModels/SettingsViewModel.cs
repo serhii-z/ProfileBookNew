@@ -95,6 +95,12 @@ namespace ProfileBook.ViewModels
             IsTime = isTime;
         }
 
+        private void UncheckCulture(bool isUkrainian, bool isRussian)
+        {
+            IsUkrainian = isUkrainian;
+            IsRussian = isRussian;
+        }
+
         #endregion
 
         #region --- Private Helpers ---
@@ -113,92 +119,74 @@ namespace ProfileBook.ViewModels
 
             if (args.PropertyName == nameof(IsName))
             {
+                UncheckSorting(_isName, false, false);
+                _settingsManager.IsSortingByName = _isName;
+
                 if (_isName)
-                {
-                    UncheckSorting(_isName, false, false);
-                    _settingsManager.IsSortingByName = _isName;
                     _settingsManager.SortingName = "Name";
-                }
                 else
-                {
-                    _settingsManager.IsSortingByName = false;
                     _settingsManager.SortingName = string.Empty;
-                }
+           
             }
 
             if (args.PropertyName == nameof(IsNickName))
             {
+                UncheckSorting(false, _isNickName, false);
+                _settingsManager.IsSortingByNickName = _isNickName;
+
                 if (_isNickName)
-                {
-                    UncheckSorting(false, _isNickName, false);
-                    _settingsManager.IsSortingByNickName = _isNickName;
                     _settingsManager.SortingName = "NickName";
-                }
                 else
-                {
-                    _settingsManager.IsSortingByNickName = false;
                     _settingsManager.SortingName = string.Empty;
-                }
+
             }
 
             if (args.PropertyName == nameof(IsTime))
             {
+                UncheckSorting(false, false, _isTime);
+                _settingsManager.IsSortingByTime = _isTime;
+
                 if (_isTime)
-                {
-                    UncheckSorting(false, false, _isTime);
-                    _settingsManager.IsSortingByTime = _isTime;
+      
                     _settingsManager.SortingName = "CreationTime";
-                }
                 else
-                {
-                    _settingsManager.IsSortingByTime = false;
                     _settingsManager.SortingName = string.Empty;
-                }
+                
             }
 
             if (args.PropertyName == nameof(IsDark))
             {
+                _settingsManager.IsDarkTheme = _isDark;
+
                 if (_isDark)
-                {
-                    _settingsManager.IsDarkTheme = _isDark;
                     _settingsManager.ThemeName = nameof(DarkTheme);
-                }
                 else
-                {
-                    _settingsManager.IsDarkTheme = false;
                     _settingsManager.ThemeName = string.Empty;
-                }
             }
 
             if (args.PropertyName == nameof(IsUkrainian))
             {
+                UncheckCulture(_isUkrainian, false);
+                _settingsManager.IsUkrainianCulture = _isUkrainian;
+
                 if (_isUkrainian)
-                {
-                    IsRussian = false;
-                    _settingsManager.IsUkrainianCulture = _isUkrainian;
                     _settingsManager.CultureName = "uk";
-                }
                 else
-                {
-                    _settingsManager.IsUkrainianCulture = false;
                     _settingsManager.CultureName = string.Empty;
-                }
+                
                 _cultureActivator.AplyCulture();
             }
 
             if (args.PropertyName == nameof(IsRussian))
             {
+                UncheckCulture(false, _isRussian);
+                _settingsManager.IsRussianCulture = _isRussian;
+
                 if (_isRussian)
-                {
-                    IsUkrainian = false;
-                    _settingsManager.IsRussianCulture = _isRussian;
                     _settingsManager.CultureName = "ru";
-                }
                 else
-                {
-                    _settingsManager.IsRussianCulture = false;
                     _settingsManager.CultureName = string.Empty;
-                }
+
                 _cultureActivator.AplyCulture();
             }
         }

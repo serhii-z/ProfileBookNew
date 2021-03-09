@@ -101,13 +101,12 @@ namespace ProfileBook.ViewModels
                 _authorizationService.AddOrUpdateAuthorization(userId);
                 return true;
             }
-            else
-            {
-                ShowAlert(Resource.SignInAlert);
-                EntryLoginText = string.Empty;
-                EntryPasswordText = string.Empty;
-                return false;
-            }
+
+            ShowAlert(Resource.SignInAlert);
+            EntryLoginText = string.Empty;
+            EntryPasswordText = string.Empty;
+
+            return false; 
         }
 
         private async void ShowAlert(string message)
