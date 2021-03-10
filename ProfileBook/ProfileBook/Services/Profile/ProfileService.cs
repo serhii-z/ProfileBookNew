@@ -58,7 +58,7 @@ namespace ProfileBook.Servises.Profile
                 case "CreationTime":
                     return _profiles.OrderBy(x => x.CreationTime).ToList();
                 default:
-                    throw new Exception();
+                    throw new Exception("Sort name exception occurred");
             }
         }
     }

@@ -85,13 +85,9 @@ namespace ProfileBook
             var userId = CrossSettings.Current.GetValueOrDefault("id", 0);
             
             if (userId > 0)
-            {
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainListView)}");
-            }
             else
-            {
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInView)}");
-            }
         }
 
         #endregion
