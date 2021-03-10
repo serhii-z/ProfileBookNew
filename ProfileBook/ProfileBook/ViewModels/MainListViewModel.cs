@@ -39,6 +39,7 @@ namespace ProfileBook.ViewModels
             _resourceDictionary = resourceDictionary;
             _themeActivator = themeActivator;
             _cultureActivator = cultureActivator;
+            ProfileList = new ObservableCollection<ProfileModel>();
         }
 
         #region --- Public Properties ---
@@ -83,10 +84,9 @@ namespace ProfileBook.ViewModels
 
         private List<ProfileModel> GetProfiles()
         {
-            var sortingName = _settingsManager.SortingName;
             var profiles = _profileService.GetAllProfiles(_authorizationService.GetAuthorizedUserId());
 
-            if (!string.IsNullOrEmpty(sortingName))
+            if (!string.IsNullOrEmpty(_settingsManager.SortingName))
             {
                 profiles = _profileService.Sort(_settingsManager.SortingName);
             }
@@ -98,7 +98,8 @@ namespace ProfileBook.ViewModels
         {
             if (profiles.Count > 0)
             {
-                ProfileList = new ObservableCollection<ProfileModel>();
+                //ProfileList = new ObservableCollection<ProfileModel>();
+                ProfileList.Clear();
 
                 foreach (var item in profiles)
                 {

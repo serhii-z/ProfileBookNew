@@ -1,5 +1,6 @@
 ﻿using ProfileBook.Models;
 using ProfileBook.Servises.Repository;
+using System.Linq;
 
 namespace ProfileBook.Servises.Authentication
 {
@@ -14,21 +15,21 @@ namespace ProfileBook.Servises.Authentication
 
         public int VerifyUser(string login, string password)
         {
-            string sql = $"SELECT * FROM Users WHERE Login='{login}' AND Password='{password}'";
-            var user = _repository.FindWithQueryAsync<UserModel>(sql).Result;
+            var users = _repository.GetAllAsync<UserModel>().Result;
+            var user = users.Where(x => x.Login == login && x.Password == password).ToList();
 
-            if(user == null)
+            if (user == null)
             {
                 return 0;
             }
 
-            return user.Id;
+            return user[0].Id;
         }
 
         public bool IsLogin(string login)
         {
-            string sql = $"SELECT * FROM Users WHERE Login='{login}'";
-            var user = _repository.FindWithQueryAsync<UserModel>(sql).Result;
+            var users = _repository.GetAllAsync<UserModel>().Result;
+            var user = users.Where(x => x.Login == login).ToList();
 
             if (user == null)
             {

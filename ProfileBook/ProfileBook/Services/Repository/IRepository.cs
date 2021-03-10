@@ -9,7 +9,6 @@ namespace ProfileBook.Servises.Repository
         Task<int> InsertAsync<T>(T item) where T : IEntityBase, new();
         Task<int> UpdateAsync<T>(T item) where T : IEntityBase, new();
         Task<int> DeleteAsync<T>(T item) where T : IEntityBase, new();
-        Task<T> FindWithQueryAsync<T>(string sql) where T : IEntityBase, new();
-        Task<List<T>> QueryAsync<T>(string sql) where T : IEntityBase, new();
+        Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new();
     }
 }

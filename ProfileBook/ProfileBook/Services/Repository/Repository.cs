@@ -40,14 +40,9 @@ namespace ProfileBook.Servises.Repository
             return _database.Value.DeleteAsync(item);
         }
 
-        public Task<T> FindWithQueryAsync<T>(string sql) where T : IEntityBase, new()
+        public Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new()
         {
-            return _database.Value.FindWithQueryAsync<T>(sql);
-        }
-
-        public Task<List<T>> QueryAsync<T>(string sql) where T : IEntityBase, new()
-        {
-            return _database.Value.QueryAsync<T>(sql);
+            return _database.Value.Table<T>().ToListAsync();
         }
     }
 }

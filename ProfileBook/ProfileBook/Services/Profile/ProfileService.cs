@@ -41,8 +41,8 @@ namespace ProfileBook.Servises.Profile
 
         public List<ProfileModel> GetAllProfiles(int userId)
         {
-            string sql = $"SELECT * FROM Profiles WHERE UserId='{userId}'";
-            _profiles = _repository.QueryAsync<ProfileModel>(sql).Result;
+            _profiles = _repository.GetAllAsync<ProfileModel>().Result;
+            _profiles = _profiles.Where(x => x.UserId == userId).ToList();
 
             return _profiles;
         }
