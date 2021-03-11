@@ -22,21 +22,18 @@ namespace ProfileBook.ViewModels
         private IProfileService _profileService;
         private IAuthorizationService _authorizationService;
         private IPageDialogService _pageDialog;
-        private ResourceDictionary _resourceDictionary;
         private IThemeActivator _themeActivator;
         private ICultureActivator _cultureActivator;
         public MainListViewModel(INavigationService navigationService,
             ISettingsManager settingsManager, IAuthorizationService authorizationService,  
             IProfileService profileService, IPageDialogService pageDialog, 
-            ResourceDictionary resourceDictionary, IThemeActivator themeActivator,
-            ICultureActivator cultureActivator) :
+            IThemeActivator themeActivator, ICultureActivator cultureActivator) :
             base(navigationService)
         {
             _settingsManager = settingsManager;
             _profileService = profileService;
             _authorizationService = authorizationService;
             _pageDialog = pageDialog;
-            _resourceDictionary = resourceDictionary;
             _themeActivator = themeActivator;
             _cultureActivator = cultureActivator;
             ProfileList = new ObservableCollection<ProfileModel>();
@@ -98,7 +95,6 @@ namespace ProfileBook.ViewModels
         {
             if (profiles.Count > 0)
             {
-                //ProfileList = new ObservableCollection<ProfileModel>();
                 ProfileList.Clear();
 
                 foreach (var item in profiles)
@@ -116,7 +112,7 @@ namespace ProfileBook.ViewModels
 
         private void InitSettings()
         {
-            _themeActivator.AplyTheme(_resourceDictionary);
+            _themeActivator.AplyTheme();
 
             Title = Resource.MainListTitle;
         }
@@ -125,7 +121,7 @@ namespace ProfileBook.ViewModels
         {
             _authorizationService.AddOrUpdateAuthorization(0);
             _settingsManager.ThemeName = nameof(LightTheme);
-            _themeActivator.AplyTheme(_resourceDictionary);
+            _themeActivator.AplyTheme();
             _cultureActivator.AplyCulture();
         }
 

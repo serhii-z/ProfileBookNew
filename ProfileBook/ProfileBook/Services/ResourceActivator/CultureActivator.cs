@@ -7,23 +7,22 @@ namespace ProfileBook.ResourceActivator
 {
     public class CultureActivator : ICultureActivator
     {
-        private ISettingsManager _manager;
+        private ISettingsManager _settingsManager;
 
-        public CultureActivator(ISettingsManager manager)
+        public CultureActivator(ISettingsManager settingsManager)
         {
-            _manager = manager;
+            _settingsManager = settingsManager;
         }
         public void AplyCulture()
         {
-            var cultureName = Preferences.Get(nameof(_manager.CultureName), "en");
+            var cultureName = Preferences.Get(nameof(_settingsManager.CultureName), "en");
 
             if (string.IsNullOrEmpty(cultureName))
             {
                 cultureName = "en";
             }
 
-            CultureInfo info = new CultureInfo(cultureName, false);
-            Resource.Culture = info;
+            Resource.Culture = new CultureInfo(cultureName, false);
         }
     }
 }

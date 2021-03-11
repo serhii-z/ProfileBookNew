@@ -55,7 +55,6 @@ namespace ProfileBook
 
             //Packages
             containerRegistry.RegisterInstance<ISettings>(CrossSettings.Current);
-            containerRegistry.RegisterInstance(App.Current.Resources);
     
             //Services
             containerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());

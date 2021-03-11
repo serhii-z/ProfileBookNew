@@ -18,22 +18,19 @@ namespace ProfileBook.ViewModels
         private IAuthenticationService _authenticationService;
         private IAuthorizationService _authorizationService;
         private IPageDialogService _pageDialog;
-        private ResourceDictionary _resourceDictionary;
         private ICultureActivator _cultureActivator;
         private IThemeActivator _themeActivator;
 
         public SignInViewModel(INavigationService navigationService,
             ISettingsManager settingsManager, IAuthorizationService authorizationService, 
             IAuthenticationService authenticationService, IPageDialogService pageDialog, 
-            ResourceDictionary resourceDictionary, ICultureActivator cultureActivator, 
-            IThemeActivator themeActivator) :
+            ICultureActivator cultureActivator, IThemeActivator themeActivator) :
             base(navigationService)
         {
             _settingsManager = settingsManager;
             _authenticationService = authenticationService;
             _authorizationService = authorizationService;
             _pageDialog = pageDialog;
-            _resourceDictionary = resourceDictionary;
             _cultureActivator = cultureActivator;
             _themeActivator = themeActivator;
         }
@@ -162,7 +159,7 @@ namespace ProfileBook.ViewModels
 
         public override void Initialize(INavigationParameters parameters)
         {
-            _themeActivator.AplyTheme(_resourceDictionary);
+            _themeActivator.AplyTheme();
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using ProfileBook.Models;
 using ProfileBook.Servises.Repository;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProfileBook.Servises.Authentication
@@ -15,8 +16,7 @@ namespace ProfileBook.Servises.Authentication
 
         public int VerifyUser(string login, string password)
         {
-            var users = _repository.GetAllAsync<UserModel>().Result;
-            var user = users.Where(x => x.Login == login && x.Password == password).ToList();
+            var user = GetAllUsers().Where(x => x.Login == login && x.Password == password).ToList();
 
             if (user == null)
             {
@@ -27,9 +27,8 @@ namespace ProfileBook.Servises.Authentication
         }
 
         public bool IsLogin(string login)
-        {
-            var users = _repository.GetAllAsync<UserModel>().Result;
-            var user = users.Where(x => x.Login == login).ToList();
+        {        
+            var user = GetAllUsers().Where(x => x.Login == login).ToList();
 
             if (user == null)
             {
@@ -44,6 +43,13 @@ namespace ProfileBook.Servises.Authentication
             var result = _repository.InsertAsync(user).Result;
 
             return result;
+        }
+
+        private List<UserModel> GetAllUsers()
+        {
+            var users = _repository.GetAllAsync<UserModel>().Result;
+
+            return users;
         }
     }
 }
