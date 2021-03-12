@@ -3,8 +3,9 @@ using Plugin.Settings.Abstractions;
 using Prism;
 using Prism.Ioc;
 using Prism.Unity;
-using ProfileBook.ResourceActivator;
+using ProfileBook.Services.Localization;
 using ProfileBook.Services.Profile;
+using ProfileBook.Services.Resource;
 using ProfileBook.Servises.Authentication;
 using ProfileBook.Servises.Authorization;
 using ProfileBook.Servises.Profile;
@@ -64,13 +65,13 @@ namespace ProfileBook
             containerRegistry.RegisterInstance<IValidator>(Container.Resolve<Validator>());
             containerRegistry.RegisterInstance<IProfileService>(Container.Resolve<ProfileService>());
             containerRegistry.RegisterInstance<IProfileImageService>(Container.Resolve<ProfileImageService>());
-            containerRegistry.RegisterInstance<IThemeActivator>(Container.Resolve<ThemeActivator>());
-            containerRegistry.RegisterInstance<ICultureActivator>(Container.Resolve<CultureActivator>());
+            containerRegistry.RegisterInstance<IResourceService>(Container.Resolve<ResourceService>());
+            containerRegistry.RegisterInstance<ILocalizationService>(Container.Resolve<LocalizationService>());
         }
 
         protected override void OnInitialized()
         {
-            Container.Resolve<CultureActivator>().AplyCulture();
+            Container.Resolve<LocalizationService>().AplyCulture();
 
             GoToView();
         }

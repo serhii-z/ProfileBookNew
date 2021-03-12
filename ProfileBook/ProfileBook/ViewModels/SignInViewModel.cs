@@ -7,8 +7,9 @@ using ProfileBook.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ProfileBook.Properties;
-using ProfileBook.ResourceActivator;
 using System.ComponentModel;
+using ProfileBook.Services.Resource;
+using ProfileBook.Services.Localization;
 
 namespace ProfileBook.ViewModels
 {
@@ -18,21 +19,21 @@ namespace ProfileBook.ViewModels
         private IAuthenticationService _authenticationService;
         private IAuthorizationService _authorizationService;
         private IPageDialogService _pageDialog;
-        private ICultureActivator _cultureActivator;
-        private IThemeActivator _themeActivator;
+        private IResourceService _resourceService;
+        private ILocalizationService _localizationService;
 
         public SignInViewModel(INavigationService navigationService,
             ISettingsManager settingsManager, IAuthorizationService authorizationService, 
             IAuthenticationService authenticationService, IPageDialogService pageDialog, 
-            ICultureActivator cultureActivator, IThemeActivator themeActivator) :
+            IResourceService resourceService, ILocalizationService localizationService) :
             base(navigationService)
         {
             _settingsManager = settingsManager;
             _authenticationService = authenticationService;
             _authorizationService = authorizationService;
             _pageDialog = pageDialog;
-            _cultureActivator = cultureActivator;
-            _themeActivator = themeActivator;
+            _resourceService = resourceService;
+            _localizationService = localizationService;
         }
 
         #region --- Public Properties ---
@@ -119,7 +120,7 @@ namespace ProfileBook.ViewModels
         {
             if (IsAuthorization())
             {
-                _cultureActivator.AplyCulture();
+                _localizationService.AplyCulture();
 
                 await navigationService.NavigateAsync($"{nameof(MainListView)}");
             }
@@ -159,7 +160,7 @@ namespace ProfileBook.ViewModels
 
         public override void Initialize(INavigationParameters parameters)
         {
-            _themeActivator.AplyTheme();
+            _resourceService.AplyTheme();
         }
 
         #endregion

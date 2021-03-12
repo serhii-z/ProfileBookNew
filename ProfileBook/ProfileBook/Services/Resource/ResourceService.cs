@@ -1,16 +1,17 @@
 ﻿using ProfileBook.Resources.Themes;
 using ProfileBook.Servises.Settings;
 
-namespace ProfileBook.ResourceActivator
+namespace ProfileBook.Services.Resource
 {
-    public class ThemeActivator : IThemeActivator
+    public class ResourceService : IResourceService
     {
         private ISettingsManager _settingsManager;
 
-        public ThemeActivator(ISettingsManager settingsManager)
+        public ResourceService(ISettingsManager settingsManager)
         {
             _settingsManager = settingsManager;
         }
+
         public void AplyTheme()
         {
             switch (_settingsManager.ThemeName)

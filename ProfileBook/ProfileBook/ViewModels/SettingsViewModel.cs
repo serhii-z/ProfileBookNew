@@ -1,6 +1,6 @@
 ﻿using Prism.Navigation;
-using ProfileBook.ResourceActivator;
 using ProfileBook.Resources.Themes;
+using ProfileBook.Services.Localization;
 using ProfileBook.Servises.Settings;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -11,13 +11,13 @@ namespace ProfileBook.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         private ISettingsManager _settingsManager;
-        private ICultureActivator _cultureActivator;
+        private ILocalizationService _localizationService;
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager,
-            ICultureActivator cultureActivator) :
+            ILocalizationService localizationService) :
             base(navigationService)
         {
             _settingsManager = settingsManager;
-            _cultureActivator = cultureActivator;
+            _localizationService = localizationService;
         }
 
         #region --- Public Properties ---
@@ -173,7 +173,7 @@ namespace ProfileBook.ViewModels
                 UncheckCulture(_isUkrainian, false);
                 _settingsManager.IsUkrainianCulture = _isUkrainian;
                 UpdateCultureName(_isUkrainian, "uk");
-                _cultureActivator.AplyCulture();
+                _localizationService.AplyCulture();
             }
 
             if (args.PropertyName == nameof(IsRussian))
@@ -181,7 +181,7 @@ namespace ProfileBook.ViewModels
                 UncheckCulture(false, _isRussian);
                 _settingsManager.IsRussianCulture = _isRussian;
                 UpdateCultureName(_isRussian, "ru");
-                _cultureActivator.AplyCulture();
+                _localizationService.AplyCulture();
             }
         }
 

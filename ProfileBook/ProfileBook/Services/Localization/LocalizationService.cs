@@ -3,13 +3,13 @@ using ProfileBook.Servises.Settings;
 using System.Globalization;
 using Xamarin.Essentials;
 
-namespace ProfileBook.ResourceActivator
+namespace ProfileBook.Services.Localization
 {
-    public class CultureActivator : ICultureActivator
+    public class LocalizationService : ILocalizationService
     {
         private ISettingsManager _settingsManager;
 
-        public CultureActivator(ISettingsManager settingsManager)
+        public LocalizationService(ISettingsManager settingsManager)
         {
             _settingsManager = settingsManager;
         }

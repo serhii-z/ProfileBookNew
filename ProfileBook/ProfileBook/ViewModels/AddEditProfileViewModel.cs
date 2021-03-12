@@ -158,7 +158,9 @@ namespace ProfileBook.ViewModels
             AddOrUpdate();
 
             if (!string.IsNullOrEmpty(_entryNickNameText) && !string.IsNullOrEmpty(_entryNameText))
+            {
                 await navigationService.GoBackAsync();
+            }     
         }
 
         private void OnImageTap()

@@ -10,9 +10,10 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using ProfileBook.Properties;
 using Prism.Services;
-using ProfileBook.ResourceActivator;
 using ProfileBook.Resources.Themes;
 using System.ComponentModel;
+using ProfileBook.Services.Resource;
+using ProfileBook.Services.Localization;
 
 namespace ProfileBook.ViewModels
 {
@@ -22,20 +23,20 @@ namespace ProfileBook.ViewModels
         private IProfileService _profileService;
         private IAuthorizationService _authorizationService;
         private IPageDialogService _pageDialog;
-        private IThemeActivator _themeActivator;
-        private ICultureActivator _cultureActivator;
+        private IResourceService _resourceService;
+        private ILocalizationService _localizationService;
         public MainListViewModel(INavigationService navigationService,
             ISettingsManager settingsManager, IAuthorizationService authorizationService,  
-            IProfileService profileService, IPageDialogService pageDialog, 
-            IThemeActivator themeActivator, ICultureActivator cultureActivator) :
+            IProfileService profileService, IPageDialogService pageDialog,
+            IResourceService resourceService, ILocalizationService localizationService) :
             base(navigationService)
         {
             _settingsManager = settingsManager;
             _profileService = profileService;
             _authorizationService = authorizationService;
             _pageDialog = pageDialog;
-            _themeActivator = themeActivator;
-            _cultureActivator = cultureActivator;
+            _resourceService = resourceService;
+            _localizationService = localizationService;
             ProfileList = new ObservableCollection<ProfileModel>();
         }
 
@@ -112,7 +113,7 @@ namespace ProfileBook.ViewModels
 
         private void InitSettings()
         {
-            _themeActivator.AplyTheme();
+            _resourceService.AplyTheme();
 
             Title = Resource.MainListTitle;
         }
@@ -121,8 +122,8 @@ namespace ProfileBook.ViewModels
         {
             _authorizationService.AddOrUpdateAuthorization(0);
             _settingsManager.ThemeName = nameof(LightTheme);
-            _themeActivator.AplyTheme();
-            _cultureActivator.AplyCulture();
+            _resourceService.AplyTheme();
+            _localizationService.AplyCulture();
         }
 
         #endregion
