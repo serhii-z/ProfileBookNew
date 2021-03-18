@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfileBook.Views.MainListView" 
+             xmlns:resource="clr-namespace:ProfileBook.Properties"
+             Title="{Binding Title}"
+             NavigationPage.HasBackButton="False">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" 
+                     Order="Primary" 
+                     Icon="exit.png" 
+                     Priority="0" 
+                     Command="{Binding LogOutTapCommand}" 
+                     CommandParameter = "0"/>
+        <ToolbarItem Name="MenuItem2" 
+                     Order="Primary" 
+                     Icon="settings.png" 
+                     Priority="1" 
+                     Command="{Binding SettingsTapCommand}" 
+                     CommandParameter = "1"/>
+    </ContentPage.ToolbarItems>
+  
+    <AbsoluteLayout BackgroundColor="{DynamicResource pageBackgroundColor}">
+        <ListView CachingStrategy="RecycleElement"
+                    ItemsSource="{Binding ProfileList, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,1,1,1"
+                    HasUnevenRows="True"
+                    VerticalOptions="FillAndExpand"
+                    x:Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Edit" 
+                                        Command="{Binding Path=BindingContext.EditTapCommand, Source={x:Reference listView}}" 
+                                        CommandParameter="{Binding .}" />
+                            <MenuItem Text="Delete" 
+                                        Command="{Binding Path=BindingContext.DeleteTapCommand, Source={x:Reference listView}}" 
+                                        CommandParameter="{Binding .}" />
+                        </ViewCell.ContextActions>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding ImagePath}" 
+                                        WidthRequest="80" 
+                                        HeightRequest="60"/>
+                                <StackLayout>
+                                    <Label Text="{Binding NickName}" 
+                                            FontSize="18" 
+                                            FontAttributes="Bold"/>
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding CreationTime}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+            </ListView.Behaviors>
+        </ListView>
+        <Label  Text="{x:Static resource:Resource.MainListLabelText}"
+                IsVisible="{Binding IsNoProfiles}"                       
+                AbsoluteLayout.LayoutBounds="0.5, 0.5, 200, 25"
+                AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <ImageButton Source="add.png"
+                WidthRequest="96" 
+                HeightRequest="96"
+                HorizontalOptions="End" 
+                VerticalOptions="End"
+                BackgroundColor="Transparent"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="1.0,1.0,-1,-1"
+                Margin="0,0,20,40"
+                Command="{Binding AddTapCommand}">
+        </ImageButton>
+    </AbsoluteLayout>
+
+</ContentPage>

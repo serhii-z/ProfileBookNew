@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfileBook.Views.SettingsView"        
+             xmlns:resource="clr-namespace:ProfileBook.Properties"
+             Title="{x:Static resource:Resource.SettingsTitle}"
+             NavigationPage.HasBackButton="False">
+
+    <Grid BackgroundColor="{DynamicResource pageBackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <CheckBox  WidthRequest="50" 
+                       IsChecked="{Binding IsName}"/>
+            <Label Text="{x:Static resource:Resource.SettingsLabelName}" 
+                   VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+        <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <CheckBox WidthRequest="50" 
+                      IsChecked="{Binding IsNickName}"/>
+            <Label Text="{x:Static resource:Resource.SettingsLabelNickName}" 
+                   VerticalTextAlignment="Center" />
+        </StackLayout>
+
+        <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <CheckBox WidthRequest="50" 
+                      IsChecked="{Binding IsTime}"/>
+            <Label Text="{x:Static resource:Resource.SettingsLabelDate}" 
+                   VerticalTextAlignment="Center" />
+        </StackLayout>
+
+        <StackLayout Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsDark}" 
+                      WidthRequest="50" />
+            <Label Text="{x:Static resource:Resource.SettingsLabelTheme}" 
+                   VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+        <StackLayout Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsUkrainian}" 
+                      WidthRequest="50" />
+            <Label Text="{x:Static resource:Resource.SettingsLabelUkrainian}" 
+                   VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+        <StackLayout Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsRussian}" 
+                      WidthRequest="50" />
+            <Label Text="{x:Static resource:Resource.SettingsLabelRussian}" 
+                   VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+        <Button Grid.Column="1" 
+                Grid.Row="7" 
+                Text="{x:Static resource:Resource.SettingsButtonText}"
+                TextColor="{DynamicResource buttonTextColor}"
+                Command="{Binding GoBackButtonTapCommand}"
+                BackgroundColor="{DynamicResource buttonBackgroundColor}"/>
+    </Grid>
+    
+</ContentPage>

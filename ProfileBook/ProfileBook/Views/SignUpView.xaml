@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfileBook.Views.SignUpView"
+             Title="{x:Static resource:Resource.SignUpTitle}"
+             xmlns:resource="clr-namespace:ProfileBook.Properties">
+
+    <Grid BackgroundColor="{DynamicResource pageBackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Entry Grid.Column="1" 
+               Grid.Row="1"
+               Placeholder="{x:Static resource:Resource.SignUpLoginPlaceholder}"
+               Text="{Binding EntryLoginText, Mode=TwoWay}"/>
+        <Entry Grid.Column="1" 
+               Grid.Row="2" 
+               Placeholder="{x:Static resource:Resource.SignUpPasswordPlaceholder}" 
+               Text="{Binding EntryPasswordText, Mode=TwoWay}"
+               IsPassword="True"/>
+        <Entry Grid.Column="1"
+               Grid.Row="3"
+               Placeholder="{x:Static resource:Resource.SignUpConfirmPasswordPlaceholder}" 
+               IsPassword="True"
+               Text="{Binding EntryConfirmPasswordText, Mode=TwoWay}"/>
+        <Button Grid.Column="1" 
+                Grid.Row="5" 
+                Text="{x:Static resource:Resource.SignUpButtonText}" 
+                TextColor="{DynamicResource buttonTextColor}"
+                Command="{Binding SignUpTapCommand}"
+                IsEnabled="{Binding EnabledButton}"
+                BackgroundColor="{DynamicResource buttonBackgroundColor}"/>
+    </Grid>
+
+</ContentPage>
